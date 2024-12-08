@@ -1,30 +1,69 @@
-# shvirtd-example-python
+#Домашнее задание к занятию "`Практическое применение Docker`" - `Никифоров Роман`
 
-Example Flask-application for docker compose training.
-## Installation
-First, you need to clone this repository:
+[Руководство по оформлению Markdown файлов](https://gist.github.com/Jekins/2bf2d0638163f1294637#Code)
 
-```bash
-git clone https://github.com/netology-code/shvirtd-example-python.git
+---
+
+### Задача 0
+
+![docker_compose_version](img/img-2.png)
+
+### Задача 1
+
+
+```
+$ cat Dockerfile.python
+FROM python:3.9-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+
+RUN pip install -r requirements.txt
+
+COPY main.py .
+
+CMD ["python", "main.py"]
 ```
 
-Now, we will need to create a virtual environment and install all the dependencies:
+Файл .dockerignore добавлять не стал, т.к. внутрь контейнера копируются два файла
 
-```bash
-python3 -m venv venv  # on Windows, use "python -m venv venv" instead
-. venv/bin/activate   # on Windows, use "venv\Scripts\activate" instead
-pip install -r requirements.txt
-python main.py
+
+### Задача 3
+
+![sql_screenshot](img/img-1.png)
+
+### Задача 4
+
 ```
-You need to run Mysql database and provide following ENV-variables for connection:  
-- DB_HOST (default: '127.0.0.1')
-- DB_USER (default: 'app')
-- DB_PASSWORD (default: 'very_strong')
-- DB_NAME (default: 'example')
+$ cat ~/clone-git.sh
+#!/bin/bash
+# Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
 
-The applications will always running on http://localhost:5000.  
-To exit venv just type ```deactivate```
+# Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update && sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin git -y
 
-## License
+cd /opt
 
-This project is licensed under the MIT License (see the `LICENSE` file for details).
+sudo git clone https://github.com/thrsnknwldgthtsntpwr/shvirtd-example-python.git
+
+cd shvirtd-example-python
+
+sudo docker compose up -d
+```
+
+![host_check_screeshot](img/img-3.png)
+
+![host_check_mysql_data](img/img-4.png)
+
+### Задача 6
+
