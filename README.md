@@ -67,3 +67,9 @@ sudo docker compose up -d
 
 ### Задача 6
 
+![dive+save](img/img-5.png)
+
+
+### Задача 6.1
+
+![docker_cp](img/img-6.png)
